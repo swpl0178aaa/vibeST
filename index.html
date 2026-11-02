@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#d3e5d9">
+  <title>BOTANICA CORE — Liquid Glass</title>
+  <style>
+@charset "UTF-8";
+:root{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue","Segoe UI",sans-serif;color:#263e37;font-synthesis:none;--ink:#263e37;--muted:#6d8075;--accent:#327d65;--line:rgba(64,89,72,.12);--glass:rgba(246,250,238,.46);--panel:rgba(250,255,244,.25)}
+*{box-sizing:border-box}body{margin:0;min-width:360px;min-height:100vh;background:#bed1c2;overflow-x:hidden}button,input{font:inherit;color:inherit}button{cursor:pointer;-webkit-tap-highlight-color:transparent}button,a,input{outline:none}button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid #2b7a66;outline-offset:4px}button{border:0;background:none}button:disabled{opacity:.3;cursor:default}button svg{pointer-events:none}svg{fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}button svg{width:20px;height:20px}h1,h2,p{margin:0}button{transition:background .2s,box-shadow .2s,transform .2s}button:active:not(:disabled){transform:scale(.96)}.wallpaper{position:fixed;inset:0;width:100%;height:100%;z-index:-2;stroke:none;transition:filter 1s,transform 1.4s}.filter-defs{position:absolute;pointer-events:none}.page-shell{width:min(1240px,calc(100% - 104px));margin:auto;padding:38px 0 27px}.page-header{display:flex;align-items:center;justify-content:space-between;margin:0 5px 38px}.edition{display:flex;align-items:center;gap:12px;text-decoration:none;color:#345447;font-size:10px;letter-spacing:1.4px;font-weight:650}.edition-mark{font-size:27px;font-weight:750;letter-spacing:-2px}.edition-slash{margin:0 10px;opacity:.4}.edition-light{font-size:9px;font-weight:500;opacity:.62}.page-tools{display:flex;align-items:center;gap:19px}.material-label{font-size:11px;letter-spacing:.3px;color:#536d5f}.glass{background:var(--glass);border:1px solid rgba(255,255,255,.63);box-shadow:inset 0 1px 1px rgba(255,255,255,.85),inset 0 -1px 1px rgba(255,255,255,.24),0 4px 14px rgba(40,65,44,.07);backdrop-filter:blur(24px) saturate(1.55);-webkit-backdrop-filter:blur(24px) saturate(1.55)}.icon-btn{width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;border-radius:50%}.icon-btn:hover:not(:disabled){background:rgba(255,255,255,.48)}.page-tools .icon-btn{width:37px;height:37px}.page-tools svg{width:17px;height:17px}.plugin{position:relative;isolation:isolate;border-radius:28px;box-shadow:inset 1px 1px 1px rgba(255,255,255,.85),inset -1px -1px 1px rgba(255,255,255,.4),0 32px 70px -15px rgba(18,58,40,.2),0 7px 17px -9px rgba(23,49,35,.19);background:linear-gradient(135deg,rgba(248,252,239,.66),rgba(238,249,232,.45) 40%,rgba(234,246,227,.36));backdrop-filter:blur(28px) saturate(1.4);-webkit-backdrop-filter:blur(28px) saturate(1.4)}.plugin:before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;background:linear-gradient(120deg,rgba(255,255,255,.35),transparent 35%,transparent 70%,rgba(255,255,255,.18));box-shadow:inset 2px 0 2px rgba(255,255,255,.6),inset -2px 0 2px rgba(255,255,255,.2)}.plugin-header{display:grid;grid-template-columns:1fr 300px 1fr;align-items:center;gap:20px;padding:25px 30px 23px}.brand{display:flex;align-items:center;gap:12px}.brand-symbol{width:41px;height:41px;border:1px solid rgba(57,91,62,.25);border-radius:13px;display:grid;place-items:center;transform:rotate(-3deg)}.brand-symbol svg{width:32px;height:32px;stroke-width:1.3}.brand h1{font-size:19px;letter-spacing:1.8px;font-weight:650;white-space:nowrap}.brand h1 span{font-weight:350;font-size:12px;letter-spacing:2px;margin-left:4px}.brand p{font-size:7.6px;letter-spacing:1.8px;margin-top:6px;color:#6c7c6b}.preset-control{border-radius:17px;display:flex;align-items:center;padding:4px;gap:2px;background:rgba(255,255,249,.34);box-shadow:inset 0 1px 1px #ffffffe6,inset 0 -1px 3px #ffffff80,0 3px 6px #35543a0a}.preset-label{flex:1;text-align:left;padding:5px 6px}.eyebrow{display:block;letter-spacing:1.4px;font-size:7px;color:#718371;font-weight:600}.eyebrow #preset-count{float:right;letter-spacing:.6px;font-size:7px;opacity:.8}.preset-name{font-size:14px;font-weight:550;display:flex;align-items:center;justify-content:space-between;margin-top:5px}.preset-name svg{width:13px;height:13px;opacity:.6}.header-actions{justify-self:end;display:flex;gap:4px;align-items:center}.header-actions .icon-btn svg{width:17px;height:17px}.divider{height:22px;width:1px;background:var(--line);margin:0 12px}.power-button{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:rgba(242,255,230,.58);color:#42784e;box-shadow:inset 0 1px 1px white,0 2px 6px #1a402320}.power-button svg{width:17px;height:17px}.power-button[aria-pressed=true]{background:#ffffff25;color:#829187}.workspace-bar{border-top:1px solid #ffffff40;border-bottom:1px solid var(--line);padding:11px 31px;display:flex;align-items:center;justify-content:space-between;font-size:10px;background:rgba(248,255,239,.12)}.workspace-bar>span{display:flex;gap:8px;align-items:center;color:#5c765e}.status-dot{display:inline-block;width:5px;height:5px;border-radius:50%;background:#689673;box-shadow:0 0 7px #7ca87855}.workspace-note{font-size:8px;letter-spacing:1.6px;color:#71816e}.workspace-note span{padding:0 12px;opacity:.4}.workspace-note b{font-weight:500;font-size:7px}.text-button{padding:0;display:flex;align-items:center;gap:7px;font-size:10px;color:#64785f}.text-button:hover{color:#244b39}.info-mark{display:grid;place-items:center;border:1px solid #74836c80;border-radius:50%;width:13px;height:13px;font-size:8px;font-family:Georgia,serif}.workspace{padding:24px}.main-grid{display:grid;grid-template-columns:1fr 1.8fr .85fr;gap:14px}.panel{border:1px solid rgba(255,255,255,.43);border-radius:19px;background:var(--panel);box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 2px 3px rgba(28,71,38,.015);padding:18px}.section-heading{display:flex;align-items:center;justify-content:space-between;gap:10px}.section-heading h2{font-size:12px;font-weight:600;letter-spacing:.1px}.section-heading h2>span{font-size:9px;font-weight:450;color:#8b9b81;margin-right:8px;font-variant-numeric:tabular-nums}.tiny-tag{font-size:7px;letter-spacing:.8px;border:1px solid #78956d30;border-radius:5px;padding:3px 5px;color:#718265;font-weight:500}.sample-name{margin-top:22px;display:flex;flex-direction:column;gap:6px;min-width:0}.sample-name>span:first-child{font-size:13px;font-weight:550;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.sample-sub{font-size:7px;letter-spacing:1.2px;color:#819075}.waveform{height:78px;position:relative;margin:13px 0 14px;border-top:1px solid #71846c12;border-bottom:1px solid #71846c12}.waveform canvas{width:100%;height:100%;display:block}.wave-time,.wave-duration{font-size:7px;color:#75846d;position:absolute;bottom:4px;font-variant-numeric:tabular-nums}.wave-time{left:0}.wave-duration{right:0}.transport{display:flex;gap:8px;align-items:center}.play-button{display:flex;align-items:center;justify-content:center;gap:7px;border-radius:25px;flex:1;font-size:10px;height:33px;background:rgba(253,255,244,.55)}.play-button svg{width:15px;height:15px}.play-button:hover{background:rgba(255,255,255,.8);box-shadow:inset 0 1px white,0 4px 12px #365a3620}.loop-button{width:32px;height:32px;color:#99a18e}.loop-button svg{width:15px;height:15px}.loop-button.selected{background:#537c4910;color:#4c7b50}.upload-button{border:1px dashed #6d866333;border-radius:9px;width:100%;margin-top:14px;padding:10px 3px;font-size:8px;display:flex;align-items:center;justify-content:center;gap:5px;color:#647759}.upload-button span{opacity:.55}.upload-button svg{width:12px;height:12px}.upload-button:hover,.source-panel.dragover{background:#ffffff66;border-color:#54875e}.field-label{font-size:6px;letter-spacing:1.4px;color:#93a08b}.segmented{display:flex;margin-top:18px;padding:4px;border-radius:24px;background:rgba(104,139,94,.07);border-color:#ffffff35;box-shadow:inset 0 1px 3px #42652f08;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}.segmented button{flex:1;font-size:10px;display:flex;align-items:center;justify-content:center;gap:6px;border-radius:20px;padding:8px 4px;color:#7d8971}.segmented button svg{width:13px;height:13px}.segmented button.active{background:linear-gradient(150deg,#ffffffa8,#f6ffea66);color:#355a40;box-shadow:inset 0 1px 1px #fff,0 2px 6px #354d3220;border:1px solid #ffffff85;padding:7px 3px}.segmented button:hover{color:#244832}.character-field{height:157px;position:relative;overflow:hidden;margin:0 -3px}.character-field>svg{width:100%;height:100%;stroke-width:.7}.field-grid{position:absolute;inset:10px 0;background-image:linear-gradient(#81927910 1px,transparent 1px),linear-gradient(90deg,#81927910 1px,transparent 1px);background-size:28px 28px;mask-image:radial-gradient(ellipse,black,transparent 70%);-webkit-mask-image:radial-gradient(ellipse,black,transparent 70%)}.field-center{position:absolute;top:50%;left:50%;height:4px;width:4px;border-radius:50%;background:#59897455;box-shadow:0 0 13px 4px #6eae7415}.field-axis{position:absolute;top:50%;font-size:6px;color:#93a18a}.axis-left{left:0}.axis-right{right:0}.character-caption{display:flex;align-items:center;gap:6px;font-size:8px;color:#738567;margin-top:8px}.live-dot{height:4px;width:4px;border-radius:50%;background:#88a274}.caption-number{margin-left:auto;font-size:7px;letter-spacing:1px;opacity:.7}.output-top{display:flex;align-items:center;justify-content:space-around;margin-top:22px;gap:12px}.meters{display:flex;gap:4px;height:100px}.meter-track{width:9px;border-radius:3px;background:#4c6a4a13;position:relative;overflow:hidden;border:1px solid #6c8b5910}.meter-track:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 4px,#e5efda80 4px 6px)}.meter-track i{display:block;position:absolute;bottom:0;width:100%;height:0;background:linear-gradient(0deg,#92ab66,#9cae62 75%,#bba55a);border-radius:2px;transition:height .09s}.meter-scale{display:flex;flex-direction:column;justify-content:space-between;font-size:6px;color:#98a28b;margin-left:3px}.meter-channels{font-size:6px;color:#819075;margin:5px 0 0 2px;display:flex;gap:9px}.mix-control{display:flex;align-items:center;flex-direction:column;gap:2px}.mix-control .knob{width:76px;height:76px}.mix-control .knob-name{font-size:9px;margin-top:3px}.mix-control .knob-value{font-size:8px;color:#6f8162;margin-top:2px}.gain-label{display:flex;align-items:center;justify-content:space-between;font-size:9px;margin-top:18px;gap:5px}.gain-label output{font-variant-numeric:tabular-nums;font-size:10px}.gain-label output span{font-size:7px;opacity:.6}input[type=range]{appearance:none;-webkit-appearance:none;width:100%;height:4px;border-radius:5px;background:linear-gradient(90deg,#849c6d 60%,#5e7f411a 60%);margin:13px 0 11px;cursor:pointer}input[type=range]::-webkit-slider-thumb{appearance:none;width:15px;height:15px;border:1px solid #ffffffc0;border-radius:50%;background:linear-gradient(#fcfff2,#dae7c4);box-shadow:0 1px 4px #253e3a30,inset 0 1px 1px white}input[type=range]::-moz-range-thumb{width:14px;height:14px;border:1px solid white;border-radius:50%;background:#f5ffe8}.output-foot{display:flex;align-items:center;justify-content:space-between;font-size:6.5px;color:#7c8b6b;gap:4px}.output-foot i{display:inline-block;width:3px;height:3px;background:#97ac6f;border-radius:50%;margin-right:3px}.macro-heading{display:flex;align-items:baseline;justify-content:space-between;padding:23px 3px 13px}.macro-heading h2{font-size:13px;font-weight:500}.macro-heading>span{font-size:6.5px;letter-spacing:1.5px;color:#849275}.macro-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.macro-card{border:1px solid #ffffff59;background:linear-gradient(135deg,#fffff533,#f8ffec0d);box-shadow:inset 0 1px 1px #ffffff30;border-radius:18px;padding:16px 13px;display:flex;align-items:center;gap:11px;position:relative;overflow:hidden}.macro-card:after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 15% 100%,var(--tint),transparent 75%);opacity:.16}.knob{width:89px;height:89px;flex-shrink:0;position:relative;cursor:ns-resize;touch-action:none;border-radius:50%;user-select:none}.knob svg{width:100%;height:100%;position:absolute;inset:0;stroke-width:2;fill:none;transform:rotate(135deg)}.knob .knob-track{stroke:#75886d20}.knob .knob-arc{stroke:var(--knob-color,#749465);stroke-linecap:round}.knob-face{position:absolute;inset:12px;border:1px solid #ffffffd0;border-radius:50%;background:radial-gradient(ellipse at 28% 19%,#ffffffbd,transparent 60%),linear-gradient(135deg,#fafff161,#e0f0cf33 55%,#ffffff70);box-shadow:inset 1px 2px 3px #ffffffd9,inset -1px -2px 3px #8caa7750,0 4px 6px #314d3e22,0 9px 18px #34573d0d;backdrop-filter:blur(5px) saturate(1.2);-webkit-backdrop-filter:blur(5px) saturate(1.2)}.knob-face:after{content:"";position:absolute;inset:4px;border:1px solid #ffffff38;border-radius:50%;border-bottom-color:#a8b99b25}.knob-indicator{position:absolute;inset:0;transform:rotate(var(--rotation,-135deg));pointer-events:none}.knob-indicator:after{content:"";position:absolute;top:7px;left:calc(50% - 1px);width:2px;height:10px;border-radius:3px;background:var(--knob-color,#749465);box-shadow:0 0 2px #ffffffb0}.knob:hover .knob-face{box-shadow:inset 1px 2px 3px white,inset -1px -2px 3px #8caa7750,0 4px 10px #314d3e2e,0 0 0 3px #ffffff28}.knob.dragging .knob-face{background-color:#ffffff44}.knob-copy{position:relative;z-index:1;min-width:0}.knob-index{font-size:6px;letter-spacing:1px;color:#8d9b7e;display:block;margin-bottom:8px}.knob-name{font-size:12px;font-weight:550;letter-spacing:.1px}.knob-description{font-size:8px;color:#839174;line-height:1.5;margin-top:4px;white-space:nowrap}.knob-value{font-size:16px;font-weight:400;margin-top:9px;font-variant-numeric:tabular-nums;letter-spacing:-.4px}.knob-value span{font-size:9px;margin-left:2px;color:#8b997c}.motion-panel{display:grid;grid-template-columns:225px 1fr;gap:25px;padding:17px 20px;margin-top:17px;background:#eff8e314}.motion-intro{padding-right:23px;border-right:1px solid var(--line)}.switch{width:27px;height:16px;padding:2px;background:#80916e2e;border-radius:12px;box-shadow:inset 0 1px 2px #53674715}.switch i{display:block;width:12px;height:12px;border-radius:50%;background:#f9ffec;box-shadow:0 1px 2px #3c503133;transition:transform .2s}.switch[aria-checked=true]{background:#82a46c}.switch[aria-checked=true] i{transform:translateX(11px)}.motion-sub{font-size:8px;color:#8a987a;margin-top:7px}.motion-controls{display:flex;align-items:baseline;gap:6px;margin-top:15px;font-size:7px;color:#8b967d}.motion-controls label{font-size:6px;letter-spacing:1px}.motion-controls input{border:0;border-bottom:1px solid #8b9c7630;background:transparent;width:32px;text-align:center;padding:0 0 2px;font-size:12px;appearance:textfield;-moz-appearance:textfield}.motion-controls input::-webkit-inner-spin-button{-webkit-appearance:none}.motion-rate{margin-left:auto;border:1px solid #7b93632b;padding:3px 6px;border-radius:5px;font-size:8px}.sequence-heading{display:flex;align-items:center;justify-content:space-between;font-size:7px;letter-spacing:1px;color:#81916f;margin-bottom:12px}.sequence-heading .text-button{font-size:8px;letter-spacing:0}.sequence-heading svg{width:11px;height:11px}.steps{display:grid;grid-template-columns:repeat(16,1fr);gap:6px}.step{height:33px;border-radius:7px;background:rgba(87,117,63,.07);border:1px solid #ffffff2e;box-shadow:inset 0 1px 2px #33521c03;position:relative}.step:after{content:"";position:absolute;bottom:7px;left:calc(50% - 1.5px);width:3px;height:3px;background:#85997333;border-radius:50%}.step.on{background:linear-gradient(140deg,#eaffce88,#b1d28c33);border-color:#fbffda80;box-shadow:inset 0 1px 1px #ffffed99,0 2px 5px #5377330a}.step.on:after{background:#709155}.step.current{outline:1px solid #749759;outline-offset:2px;background:#d4eeb999;box-shadow:0 0 12px #88b15c40}.step:hover{background:#f4ffda99}.sequence-footer{display:grid;grid-template-columns:repeat(4,1fr);margin-top:5px;font-size:6px;color:#95a182;position:relative}.sequence-state{position:absolute;right:0;top:0;font-size:6px;color:#82926f;letter-spacing:.3px}.plugin-footer{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding:13px 29px;font-size:7px;color:#7b8c6c;letter-spacing:.4px}.plugin-footer>span:first-child{display:flex;align-items:center;gap:6px;font-size:6px;letter-spacing:1px}.plugin-footer .status-dot{width:4px;height:4px}.footer-dot{padding:0 8px;opacity:.5}.version{font-size:6px;letter-spacing:1px}.version b{font-weight:400;margin-left:8px;opacity:.7}.page-footer{display:flex;align-items:center;justify-content:space-between;margin:25px 6px 0;font-size:10px;color:#375f4b}.page-footer em{font-style:normal;opacity:.55;margin-left:4px}.page-footer>span:last-child{font-size:7px;letter-spacing:1.5px;opacity:.65}.toast{position:fixed;z-index:5;left:50%;bottom:25px;transform:translate(-50%,15px);padding:13px 22px;border-radius:40px;font-size:12px;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;max-width:90%;text-align:center}.toast.visible{opacity:1;transform:translate(-50%,0)}.modal{color:var(--ink);width:min(460px,calc(100% - 32px));border-radius:24px;padding:26px;background:#eff7e7d9;box-shadow:0 30px 100px #183c3b40;max-height:85vh}.modal::backdrop{background:#193e3830;backdrop-filter:blur(8px)}.dialog-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.dialog-heading h2{font-size:24px;font-weight:450;letter-spacing:-.6px;margin-top:8px}.dialog-heading .eyebrow{font-size:7px}.close-modal{font-size:24px;color:#80917b}.preset-item{display:flex;text-align:left;width:100%;padding:15px 12px;gap:16px;align-items:center;border-top:1px solid #6a8a6315;border-radius:10px}.preset-item:hover,.preset-item.chosen{background:#ffffff60}.preset-item .preset-num{font-size:10px;color:#8c9d80}.preset-item strong{display:block;font-size:13px;font-weight:550}.preset-item small{display:block;font-size:9px;color:#879578;margin-top:5px}.preset-item .preset-profile{margin-left:auto;font-size:7px;text-transform:uppercase;letter-spacing:1px;color:#7b956c}.dialog-footer{font-size:10px;color:#718368;margin-top:18px}.about-copy p{font-size:12px;line-height:1.9;color:#5c7358;margin:15px 0}.about-copy b{font-weight:600}.bypassed .character-field,.bypassed .macro-grid{opacity:.5}.bypassed .workspace-bar .status-dot{background:#b7a778}body[data-theme=dusk] .wallpaper{filter:hue-rotate(92deg) saturate(.7);transform:scale(1.05)}body[data-theme=dusk]{--panel:rgba(248,250,255,.26);--glass:rgba(244,247,255,.5)}body[data-theme=dusk] .plugin{background:linear-gradient(135deg,#f1f6ffe0,#e9eeff90 45%,#dee5f066)}body[data-theme=dusk] .page-header,body[data-theme=dusk] .page-footer{filter:hue-rotate(80deg)}
+@supports (backdrop-filter:url(#glass-refraction)){.preset-control,.play-button,.power-button{backdrop-filter:url(#glass-refraction) blur(8px) saturate(1.35)}}
+@media(min-width:1500px){.page-shell{padding-top:6vh}.page-header{margin-bottom:5vh}}
+@media(max-width:1150px){.page-shell{width:calc(100% - 48px);padding-top:25px}.plugin-header{padding:22px;grid-template-columns:1fr 270px auto;gap:12px}.brand h1{font-size:16px}.brand p{font-size:6px}.brand-symbol{width:35px;height:35px}.brand-symbol svg{width:27px;height:27px}.brand{gap:8px}.workspace{padding:18px}.panel{padding:15px}.main-grid{gap:10px;grid-template-columns:1fr 1.55fr .85fr}.macro-card{padding:13px 8px;gap:5px}.knob{width:78px;height:78px}.knob-name{font-size:11px}.knob-description{font-size:7px}.knob-value{font-size:14px}.output-top{gap:4px}.mix-control .knob{width:67px;height:67px}.motion-panel{grid-template-columns:195px 1fr;gap:20px}.steps{gap:4px}.workspace-note{font-size:6px}.field-label{display:none}.macro-grid{gap:8px}}
+@media(max-width:900px){.page-shell{width:calc(100% - 32px)}.edition-light,.edition-slash{display:none}.brand h1 span{display:block;font-size:8px;margin:3px 0 0}.brand p{display:none}.plugin-header{grid-template-columns:1fr 250px auto}.header-actions .divider{margin:0 4px}.main-grid{grid-template-columns:1fr 1.5fr}.output-panel{grid-column:1/-1;display:grid;grid-template-columns:90px 1fr 140px 1fr;gap:20px;align-items:center;padding:12px 18px}.output-panel .section-heading{align-self:start;margin-top:9px}.output-panel .tiny-tag{display:none}.output-top{margin:0;justify-content:center;gap:22px}.meters{height:45px}.meter-scale{font-size:5px}.meter-channels{display:none}.mix-control{flex-direction:row;gap:8px}.mix-control .knob{width:60px;height:60px}.mix-control .knob-name{margin:0}.mix-control .knob-value{margin:0}.gain-label{margin:0;font-size:8px}.output-foot{grid-column:4;margin-top:-22px}.output-panel input{margin:0}.macro-grid{grid-template-columns:repeat(2,1fr)}.macro-card{padding:14px 20px;gap:20px}.knob{width:85px;height:85px}.knob-name{font-size:13px}.knob-description{font-size:9px}.knob-value{font-size:17px}.motion-panel{grid-template-columns:175px 1fr;gap:16px}.motion-intro{padding-right:16px}.step{height:29px}.workspace-note{display:none}.page-header{margin-bottom:25px}.page-footer>span:last-child{display:none}}
+@media(max-width:620px){.page-shell{width:calc(100% - 24px);padding-top:18px}.page-header{margin:0 4px 20px}.edition{font-size:8px;gap:8px}.material-label{font-size:9px}.page-tools{gap:10px}.page-tools .icon-btn{width:31px;height:31px}.plugin{border-radius:22px}.plugin-header{display:flex;flex-wrap:wrap;gap:17px;padding:20px}.brand{flex:1}.brand h1{font-size:16px}.brand h1 span{display:inline;margin-left:3px;font-size:10px}.brand-symbol{width:32px;height:32px;border-radius:10px}.header-actions{order:0}.header-actions .icon-btn{width:30px;height:30px}.header-actions .divider{margin:0 5px}.power-button{width:32px;height:32px}.preset-control{order:1;width:100%}.preset-label{padding:6px 9px}.preset-name{font-size:13px}.eyebrow{font-size:6px}.workspace-bar{padding:10px 22px;font-size:9px}.workspace{padding:12px}.main-grid{grid-template-columns:1fr;gap:12px}.source-panel{display:grid;grid-template-columns:1fr 1fr;gap:0 15px;padding:17px}.source-panel .section-heading{grid-column:1/-1}.sample-name{margin-top:18px}.waveform{grid-column:1/-1;grid-row:3;height:65px;margin:10px 0}.transport{grid-column:2;grid-row:2;align-self:center;margin-top:12px}.play-button{font-size:9px}.upload-button{grid-column:1/-1;margin-top:0}.character-panel{padding:17px}.character-field{height:150px}.character-caption{margin-top:0;margin-bottom:3px}.segmented{margin-top:14px}.output-panel{grid-column:auto;grid-template-columns:1fr 1fr;gap:12px 18px;padding:17px;position:relative}.output-panel .section-heading{grid-column:1/-1;margin:0}.output-top{grid-row:2/5;grid-column:1;gap:15px;justify-content:flex-start}.meters{height:62px}.meter-scale{font-size:6px}.mix-control{flex-wrap:wrap;width:74px;justify-content:center;gap:2px}.mix-control .knob{width:65px;height:65px}.mix-control .knob-name,.mix-control .knob-value{font-size:8px}.gain-label{grid-column:2;align-self:end;margin-top:9px}.output-panel input{grid-column:2}.output-foot{grid-column:2;margin:0;align-self:start;font-size:6px}.macro-heading{padding:20px 5px 12px}.macro-heading h2{font-size:12px}.macro-heading>span{font-size:5px;letter-spacing:.7px}.macro-grid{gap:8px}.macro-card{padding:13px 6px;gap:6px;border-radius:15px}.knob{width:68px;height:68px}.knob-face{inset:10px}.knob-name{font-size:11px}.knob-description{font-size:6px}.knob-value{font-size:15px;margin-top:7px}.knob-index{font-size:5px;margin-bottom:6px}.motion-panel{grid-template-columns:1fr;padding:16px;gap:16px}.motion-intro{border:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px 18px}.motion-intro .section-heading{grid-column:1;gap:15px}.motion-sub{grid-column:1;font-size:7px;margin:0}.motion-controls{grid-column:2;grid-row:1/3;margin:0;align-self:center}.motion-controls label{font-size:5px}.steps{gap:4px}.step{height:31px;border-radius:5px}.sequence-state{font-size:5px}.plugin-footer{padding:13px 18px;gap:8px}.plugin-footer>span:first-child{font-size:5px}.version{font-size:5px}.version b{margin-left:3px}#footer-hint{display:none}.page-footer{margin:20px 5px;font-size:9px}.page-footer em{display:block;margin:4px 0}.modal{padding:22px}.dialog-heading h2{font-size:21px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;scroll-behavior:auto!important}}
+
+</style>
+</head>
+<body>
+  <svg class="wallpaper" viewBox="0 0 1600 1200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="sky" x2=".9" y2="1"><stop stop-color="#e9e9db"/><stop offset=".5" stop-color="#b2cfc4"/><stop offset="1" stop-color="#a4c8c4"/></linearGradient>
+      <linearGradient id="leaf1" x1=".3" y1="0" x2=".6" y2="1"><stop stop-color="#b5d8ad"/><stop offset=".38" stop-color="#77ac9b"/><stop offset=".75" stop-color="#276d63"/><stop offset="1" stop-color="#174c4c"/></linearGradient>
+      <linearGradient id="leaf2" x1="0" y1="0" x2="1" y2=".7"><stop stop-color="#faf6d1"/><stop offset=".32" stop-color="#b9d8b5"/><stop offset=".7" stop-color="#78afa0"/><stop offset="1" stop-color="#327e78"/></linearGradient>
+      <linearGradient id="leaf3" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#dfeccb"/><stop offset=".55" stop-color="#90c1ae"/><stop offset="1" stop-color="#3c8a81"/></linearGradient>
+      <filter id="soft"><feGaussianBlur stdDeviation="2"/></filter>
+      <filter id="shadow"><feDropShadow dx="-18" dy="8" stdDeviation="25" flood-color="#204d42" flood-opacity=".25"/></filter>
+      <radialGradient id="light"><stop stop-color="#fffce9" stop-opacity=".65"/><stop offset="1" stop-color="#fffce9" stop-opacity="0"/></radialGradient>
+    </defs>
+    <rect width="1600" height="1200" fill="url(#sky)"/>
+    <g filter="url(#soft)">
+      <path d="M-150 1200C680 1350 1220 400 1350-200L1750-160 1800 1300Z" fill="url(#leaf1)"/>
+      <path d="M-150 1250C300 670 870 810 1180-120L1420-120C1310 520 900 1050 170 1320Z" fill="url(#leaf2)" filter="url(#shadow)"/>
+      <path d="M-200 980C190 660 560 500 540-150L850-150C760 560 390 870-200 1220Z" fill="url(#leaf3)" filter="url(#shadow)"/>
+      <path d="M-100 1100C400 665 790 700 1110-80" fill="none" stroke="#e4efd2" stroke-opacity=".55" stroke-width="3"/>
+      <path d="M400 1300C1050 930 1350 620 1480 80" fill="none" stroke="#b3d7bc" stroke-opacity=".2" stroke-width="2"/>
+    </g>
+    <ellipse cx="580" cy="160" rx="900" ry="650" fill="url(#light)"/>
+  </svg>
+  <svg width="0" height="0" class="filter-defs" aria-hidden="true"><defs>
+    <filter id="glass-refraction" x="0%" y="0%" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency=".009 .018" numOctaves="2" seed="8" result="noise"/>
+      <feGaussianBlur in="noise" stdDeviation="3" result="smooth"/>
+      <feDisplacementMap in="SourceGraphic" in2="smooth" scale="14" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs></svg>
+  <div class="page-shell">
+    <header class="page-header">
+      <a class="edition" href="#"><span class="edition-mark">b.</span><span>BOTANICA LAB<span class="edition-slash"> / </span><span class="edition-light">DESIGN EXPLORATION 001</span></span></a>
+      <div class="page-tools"><span class="material-label">Liquid Glass edition</span><button id="theme" class="glass icon-btn" aria-label="背景を切り替え" title="背景を切り替え"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button></div>
+    </header>
+    <main class="plugin glass" aria-label="BOTANICA CORE VST インタラクティブモック">
+      <header class="plugin-header">
+        <div class="brand"><div class="brand-symbol"><svg viewBox="0 0 40 40"><path d="M20 32V17M20 25C7 26 6 15 8 9c9 0 14 6 12 16ZM20 20C20 10 26 5 34 7c0 9-5 15-14 13Z"/></svg></div><div><h1>BOTANICA <span>CORE</span></h1><p>SOUND, IN A DIFFERENT NATURE.</p></div></div>
+        <div class="preset-control glass">
+          <button class="icon-btn" id="preset-prev" aria-label="前のプリセット"><svg viewBox="0 0 24 24"><path d="m14 7-5 5 5 5"/></svg></button>
+          <button id="preset-open" class="preset-label" aria-haspopup="dialog"><span class="eyebrow">FACTORY PRESET <span id="preset-count">01 / 06</span></span><span class="preset-name"><span id="preset-name">Glass Garden</span><svg viewBox="0 0 24 24"><path d="m8 10 4 4 4-4"/></svg></span></button>
+          <button class="icon-btn" id="preset-next" aria-label="次のプリセット"><svg viewBox="0 0 24 24"><path d="m10 7 5 5-5 5"/></svg></button>
+        </div>
+        <div class="header-actions"><button class="icon-btn" id="undo" title="元に戻す" aria-label="元に戻す" disabled><svg viewBox="0 0 24 24"><path d="M8 5 4 9l4 4M4 9h9a6 6 0 1 1 0 12"/></svg></button><button class="icon-btn" id="randomize" title="音色をランダムに変更" aria-label="音色をランダムに変更"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"/><path d="M8 8h.01M16 8h.01M12 12h.01M8 16h.01M16 16h.01" stroke-width="2.8"/></svg></button><span class="divider"></span><button class="power-button glass" id="bypass" aria-label="エフェクトをバイパス" aria-pressed="false" title="エフェクトをバイパス"><svg viewBox="0 0 24 24"><path d="M12 3v9m-5-7a8 8 0 1 0 10 0"/></svg></button></div>
+      </header>
+      <div class="workspace-bar"><span><i class="status-dot"></i><span id="engine-status">Ready to bloom</span></span><div class="workspace-note">SAMPLE TRANSFORMATION INSTRUMENT <span>•</span> <b>STEREO</b></div><button id="info" class="text-button" aria-label="このモックについて">About <span class="info-mark">i</span></button></div>
+      <div class="workspace">
+        <div class="main-grid">
+          <section class="panel source-panel" id="drop-zone" aria-label="サンプル音源">
+            <div class="section-heading"><h2><span>01</span> Source</h2><span class="tiny-tag" id="source-tag">DEMO</span></div>
+            <div class="sample-name"><span id="sample-name">Dewdrop chimes</span><span class="sample-sub" id="sample-info">GENERATED SAMPLE · STEREO</span></div>
+            <div class="waveform"><canvas id="waveform" aria-label="サンプルの波形"></canvas><span class="wave-time" id="play-time">0:00</span><span class="wave-duration" id="duration">0:08</span></div>
+            <div class="transport"><button id="play" class="play-button glass" aria-label="試聴を再生"><svg viewBox="0 0 24 24"><path d="m9 5 11 7-11 7Z" fill="currentColor" stroke="none"/></svg><span>Play sample</span></button><button id="loop" class="icon-btn loop-button selected" aria-label="ループ再生" aria-pressed="true" title="ループ再生"><svg viewBox="0 0 24 24"><path d="m17 2 4 4-4 4M3 10V8a2 2 0 0 1 2-2h16M7 22l-4-4 4-4m14 0v2a2 2 0 0 1-2 2H3"/></svg></button></div>
+            <button class="upload-button" id="upload"><svg viewBox="0 0 24 24"><path d="M12 16V3m-5 5 5-5 5 5M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"/></svg>Drop your sample <span>or browse</span></button>
+            <input type="file" id="file-input" accept="audio/*,.wav,.aif,.aiff,.mp3,.flac,.ogg" hidden>
+          </section>
+          <section class="panel character-panel" aria-label="音色のキャラクター">
+            <div class="section-heading"><h2><span>02</span> Character</h2><span class="field-label">CHARACTER FIELD</span></div>
+            <div class="segmented glass" role="group" aria-label="キャラクタープロファイル"><button data-profile="botanica" class="active" aria-pressed="true"><svg viewBox="0 0 24 24"><path d="M6 19C5 8 11 4 20 4c0 10-5 16-14 15Zm0 0 9-9"/></svg>Botanica</button><button data-profile="metal" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="m12 3 8 5v8l-8 5-8-5V8Zm0 0v18M4 8l8 5 8-5"/></svg>Metal</button><button data-profile="glitch" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M3 13h4V5h4v14h4V9h6"/></svg>Glitch</button></div>
+            <div class="character-field"><div class="field-grid"></div><svg id="bloom" viewBox="0 0 480 170" aria-hidden="true"><defs><linearGradient id="bloom-gradient"><stop stop-color="#187e73" stop-opacity=".1"/><stop offset=".4" stop-color="#258378"/><stop offset=".65" stop-color="#4d9b8c"/><stop offset="1" stop-color="#8bb995" stop-opacity=".15"/></linearGradient></defs><g id="bloom-lines"></g></svg><span class="field-axis axis-left">−1</span><span class="field-axis axis-right">+1</span><div class="field-center"></div></div>
+            <div class="character-caption"><span class="live-dot"></span><span id="character-caption">Soft edges. Infinite possibilities.</span><span class="caption-number" id="profile-number">B / 01</span></div>
+          </section>
+          <section class="panel output-panel" aria-label="音声出力">
+            <div class="section-heading"><h2><span>03</span> Output</h2><span class="tiny-tag">ST</span></div>
+            <div class="output-top"><div class="meter-block"><div class="meters"><div class="meter-track"><i id="meter-l"></i></div><div class="meter-track"><i id="meter-r"></i></div><div class="meter-scale"><span>0</span><span>−12</span><span>−24</span><span>−48</span></div></div><div class="meter-channels">L <span>R</span></div></div><div class="mix-control" id="mix-control"></div></div>
+            <div class="gain-label"><label for="gain">Output gain</label><output id="gain-value">−6.0 <span>dB</span></output></div><input id="gain" type="range" min="-24" max="6" step="0.5" value="-6" aria-label="出力ゲイン">
+            <div class="output-foot"><span id="level-value">−∞ dBFS</span><span><i></i> Soft limiter</span></div>
+          </section>
+        </div>
+        <div class="macro-heading"><h2>Shape your sound</h2><span>FOUR GESTURES. ENDLESS TEXTURES.</span></div>
+        <section class="macro-grid" id="macros" aria-label="4つの音色マクロ"></section>
+        <section class="motion-panel panel" aria-label="モーションシーケンサー">
+          <div class="motion-intro"><div class="section-heading"><h2><span>04</span> Motion</h2><button id="motion-toggle" class="switch" role="switch" aria-checked="false" aria-label="モーションを有効にする"><i></i></button></div><div class="motion-sub">A little unpredictability.</div><div class="motion-controls"><label for="tempo">TEMPO</label><input id="tempo" type="number" min="40" max="200" value="112" aria-label="テンポ BPM"><span>BPM</span><span class="motion-rate">1/16</span></div></div>
+          <div class="sequencer"><div class="sequence-heading"><span>FRACTURE SEQUENCE</span><button id="shuffle" class="text-button"><svg viewBox="0 0 24 24"><path d="M3 6h3c5 0 7 12 12 12h3m-4-4 4 4-4 4M3 18h3c2 0 3-2 4-4m4-4c1-2 2-4 4-4h3m-4-4 4 4-4 4"/></svg>Shuffle</button></div><div class="steps" id="steps"></div><div class="sequence-footer"><span>01</span><span>05</span><span>09</span><span>13</span><span class="sequence-state" id="sequence-state">Enable motion to animate</span></div></div>
+        </section>
+      </div>
+      <footer class="plugin-footer"><span><i class="status-dot"></i><span id="audio-status">LOCAL AUDIO ENGINE</span></span><span id="footer-hint">Drag a knob to explore <span class="footer-dot">·</span> Double-click to reset</span><span class="version">INTERACTIVE MOCK <b>v.01</b></span></footer>
+    </main>
+    <footer class="page-footer"><span>Organic by nature. <em>Unexpected by design.</em></span><span>BOTANICA CORE <span class="footer-dot">/</span> LIQUID GLASS STUDY</span></footer>
+  </div>
+  <div id="toast" role="status" class="toast glass"></div>
+  <dialog id="preset-dialog" class="modal glass"><div class="dialog-heading"><div><span class="eyebrow">EXPLORE THE COLLECTION</span><h2>Find your nature.</h2></div><button class="icon-btn close-modal" aria-label="閉じる">×</button></div><div id="preset-list"></div><div class="dialog-footer">プリセットは音色設定だけを切り替えます。</div></dialog>
+  <dialog id="info-dialog" class="modal glass"><div class="dialog-heading"><div><span class="eyebrow">BOTANICA CORE / DESIGN STUDY</span><h2>A softer kind of interface.</h2></div><button class="icon-btn close-modal" aria-label="閉じる">×</button></div><div class="about-copy"><p>AppleのLiquid Glassに着想を得た、VSTプラグインのインタラクティブUIモックです。背景のぼかしと屈折、透ける素材、縁の反射を組み合わせています。AppleのネイティブAPIは使用していません。</p><p><b>操作：</b>ノブを上下にドラッグ、矢印キーで微調整、ダブルクリックで初期値に戻せます。Shift＋ドラッグは細かい調整。スペースキーで再生／停止。</p><p><b>試聴：</b>自作デモ音と読み込んだ音声をWeb Audioで再生します。マクロはフィルター・トレモロ・ディレイ・リバーブによる簡易音色処理です。中央の図形はパラメータの視覚化、出力メーターは実音声の解析値です。</p><p>このHTMLはデザイン・試聴用です。VST3バイナリや正式なスペクトルDSPは含みません。対応形式はブラウザ依存、音声は30 MB・120秒まで。ファイルは外部へ送信されません。</p></div></dialog>
+  <script>
+/* BOTANICA CORE browser audition engine. This is a Web Audio UI prototype,
+   not the spectral/modal processing engine of a native VST. No dependencies. */
+(function () {
+  'use strict';
+  const clamp = (n, a, b) => Math.min(b, Math.max(a, n));
+
+  class BotanicaAudio {
+    constructor() {
+      this.params = { organic: .62, metallic: .28, fracture: .18, space: .68,
+        mix: .75, gain: -6, bypass: false, profile: 'botanica', loop: true, tempo: 120 };
+      this.context = null;
+      this.source = null;
+      this.playing = false;
+      this.startedAt = 0;
+      this.loadToken = 0;
+      this.wave = new Float32Array(1024);
+      this.freq = new Uint8Array(512);
+      this.waveL = new Float32Array(1024);
+      this.waveR = new Float32Array(1024);
+      this.demo = this.makeDemo();
+      this.info = { name: 'Dewdrop chimes', duration: 8, sampleRate: 48000,
+        channels: 2, demo: true, peaks: this.makePeaks(this.demo[0]) };
+    }
+
+    makeDemo() {
+      const rate = 48000, seconds = 8;
+      const left = new Float32Array(rate * seconds), right = new Float32Array(left.length);
+      const notes = [62, 69, 74, 66, 71, 69, 76, 74, 62, 66, 69, 73, 71, 66, 69, 74];
+      notes.forEach((note, k) => {
+        const hz = 440 * Math.pow(2, (note - 69) / 12);
+        const start = Math.round(k * .5 * rate);
+        const pan = Math.sin(k * 2.4) * .35;
+        for (let i = 0; i < rate * 2.2 && start + i < left.length; i++) {
+          const t = i / rate;
+          const attack = Math.min(1, t / .007);
+          const envelope = attack * Math.exp(-t * 2.7);
+          const sample = (Math.sin(2 * Math.PI * hz * t) * .20
+            + Math.sin(2 * Math.PI * hz * 2.002 * t) * .055 * Math.exp(-t * 4)
+            + Math.sin(2 * Math.PI * hz * 3.01 * t) * .024 * Math.exp(-t * 6)) * envelope;
+          left[start + i] += sample * (1 - pan);
+          right[start + i] += sample * (1 + pan);
+        }
+      });
+      // Gentle loop seam, with no random or externally sourced material.
+      for (let i = 0; i < 960; i++) {
+        const fade = i / 960;
+        left[i] *= fade; right[i] *= fade;
+        left[left.length - 1 - i] *= fade;
+        right[right.length - 1 - i] *= fade;
+      }
+      return [left, right];
+    }
+
+    makePeaks(data) {
+      const peaks = [], count = 192;
+      for (let i = 0; i < count; i++) {
+        const start = Math.floor(i * data.length / count);
+        const end = Math.max(start + 1, Math.floor((i + 1) * data.length / count));
+        let peak = 0;
+        for (let j = start; j < end && j < data.length; j++) peak = Math.max(peak, Math.abs(data[j]));
+        peaks.push(peak);
+      }
+      return peaks;
+    }
+
+    async init() {
+      if (!this.context) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContext) throw new Error('このブラウザは音声試聴に対応していません。');
+        const c = this.context = new AudioContext();
+        this.input = c.createGain();
+        this.dry = c.createGain();
+        this.wet = c.createGain();
+        this.output = c.createGain();
+        this.filter = c.createBiquadFilter(); this.filter.type = 'lowpass';
+        this.metal = c.createBiquadFilter(); this.metal.type = 'peaking';
+        this.gate = c.createGain();
+        this.comb = c.createDelay(.1);
+        this.combFeedback = c.createGain();
+        this.combLevel = c.createGain();
+        this.combDamp = c.createBiquadFilter();
+        this.combDamp.type = 'lowpass'; this.combDamp.frequency.value = 6200;
+        this.reverb = c.createConvolver();
+        this.reverbLevel = c.createGain();
+        this.lfo = c.createOscillator(); this.lfo.type = 'square';
+        this.lfoDepth = c.createGain();
+        this.limiter = c.createDynamicsCompressor();
+        this.limiter.threshold.value = -3;
+        this.limiter.knee.value = 2;
+        this.limiter.ratio.value = 12;
+        this.limiter.attack.value = .003;
+        this.limiter.release.value = .15;
+        this.analyser = c.createAnalyser();
+        this.analyser.fftSize = 1024;
+        this.analyser.smoothingTimeConstant = .8;
+        this.stereoSplitter = c.createChannelSplitter(2);
+        this.analyserL = c.createAnalyser();
+        this.analyserR = c.createAnalyser();
+        this.analyserL.fftSize = this.analyserR.fftSize = 1024;
+        this.input.connect(this.dry).connect(this.output);
+        this.input.connect(this.filter).connect(this.metal).connect(this.gate);
+        this.gate.connect(this.wet).connect(this.output);
+        this.gate.connect(this.comb);
+        this.comb.connect(this.combDamp).connect(this.combFeedback).connect(this.comb);
+        this.comb.connect(this.combLevel).connect(this.wet);
+        this.gate.connect(this.reverb).connect(this.reverbLevel).connect(this.wet);
+        this.output.connect(this.limiter).connect(this.analyser).connect(c.destination);
+        this.limiter.connect(this.stereoSplitter);
+        this.stereoSplitter.connect(this.analyserL, 0);
+        this.stereoSplitter.connect(this.analyserR, 1);
+        this.lfo.connect(this.lfoDepth).connect(this.gate.gain);
+        this.lfo.start();
+        this.reverb.buffer = this.makeImpulse(c);
+        this.buffer = c.createBuffer(2, this.demo[0].length, 48000);
+        this.buffer.copyToChannel(this.demo[0], 0);
+        this.buffer.copyToChannel(this.demo[1], 1);
+        this.demo = null;
+        this.applyParams();
+      }
+      if (this.context.state !== 'running' && this.context.state !== 'closed') await this.context.resume();
+      return this.getInfo();
+    }
+
+    makeImpulse(c) {
+      const length = Math.round(c.sampleRate * 2.8);
+      const buffer = c.createBuffer(2, length, c.sampleRate);
+      let seed = 39217;
+      const noise = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 2147483648 - 1; };
+      for (let ch = 0; ch < 2; ch++) {
+        const data = buffer.getChannelData(ch);
+        let smoothed = 0;
+        for (let i = 0; i < length; i++) {
+          smoothed = smoothed * .55 + noise() * .45;
+          data[i] = smoothed * Math.pow(1 - i / length, 2.8);
+        }
+      }
+      return buffer;
+    }
+
+    async loadFile(file) {
+      if (!file || !file.size) throw new Error('音声ファイルを選択してください。');
+      if (file.size > 30 * 1024 * 1024) throw new Error('30 MB以下の音声ファイルを選択してください。');
+      const token = ++this.loadToken;
+      await this.init();
+      let decoded;
+      try { decoded = await this.context.decodeAudioData(await file.arrayBuffer()); }
+      catch (_) { throw new Error('音声を読み込めませんでした。WAVまたはMP3をお試しください。'); }
+      if (token !== this.loadToken) throw new Error('新しいファイルの読み込みに切り替えました。');
+      if (decoded.duration > 120) throw new Error('120秒以下の音声を選択してください。');
+      if (decoded.numberOfChannels > 2) throw new Error('モノラルまたはステレオの音声を選択してください。');
+      this.stop();
+      this.buffer = decoded;
+      this.info = { name: file.name, duration: decoded.duration, sampleRate: decoded.sampleRate,
+        channels: decoded.numberOfChannels, demo: false, peaks: this.makePeaks(decoded.getChannelData(0)) };
+      return this.getInfo();
+    }
+
+    async play() {
+      await this.init();
+      this.stop();
+      const c = this.context, source = c.createBufferSource(), fade = c.createGain();
+      source.buffer = this.buffer;
+      source.loop = this.params.loop;
+      source.connect(fade).connect(this.input);
+      fade.gain.setValueAtTime(0, c.currentTime);
+      fade.gain.linearRampToValueAtTime(1, c.currentTime + .012);
+      this.source = source;
+      this.sourceFade = fade;
+      this.startedAt = c.currentTime;
+      this.playing = true;
+      source.onended = () => {
+        source.disconnect(); fade.disconnect();
+        if (this.source === source) { this.source = null; this.sourceFade = null; this.playing = false; }
+      };
+      source.start();
+    }
+
+    stop() {
+      if (this.source && this.context) {
+        const source = this.source, fade = this.sourceFade, now = this.context.currentTime;
+        fade.gain.cancelScheduledValues(now);
+        fade.gain.setValueAtTime(fade.gain.value, now);
+        fade.gain.linearRampToValueAtTime(0, now + .018);
+        try { source.stop(now + .02); } catch (_) { /* Already ended. */ }
+      }
+      this.source = null;
+      this.sourceFade = null;
+      this.playing = false;
+    }
+
+    setParams(changes) {
+      for (const key of ['organic', 'metallic', 'fracture', 'space', 'mix']) {
+        if (Number.isFinite(changes[key])) this.params[key] = clamp(changes[key], 0, 1);
+      }
+      if (Number.isFinite(changes.gain)) this.params.gain = clamp(changes.gain, -24, 6);
+      if (Number.isFinite(changes.tempo)) this.params.tempo = clamp(changes.tempo, 40, 240);
+      if (typeof changes.bypass === 'boolean') this.params.bypass = changes.bypass;
+      if (typeof changes.loop === 'boolean') this.params.loop = changes.loop;
+      if (typeof changes.profile === 'string') this.params.profile = changes.profile.toLowerCase();
+      if (this.source) this.source.loop = this.params.loop;
+      if (this.context) this.applyParams();
+    }
+
+    applyParams() {
+      const p = this.params, now = this.context.currentTime;
+      const smooth = (param, value) => param.setTargetAtTime(value, now, .025);
+      const isMetal = p.profile === 'metal', isGlitch = p.profile === 'glitch';
+      smooth(this.filter.frequency, 15000 * Math.pow(.12, p.organic));
+      smooth(this.filter.Q, .4 + p.organic * 1.6);
+      smooth(this.metal.frequency, isMetal ? 2200 : 1600);
+      smooth(this.metal.Q, 1.5 + p.metallic * 6);
+      smooth(this.metal.gain, p.metallic * (isMetal ? 8 : 5));
+      smooth(this.comb.delayTime, isMetal ? .0027 : .0063);
+      smooth(this.combFeedback.gain, .05 + p.metallic * .36);
+      smooth(this.combLevel.gain, p.metallic * .30);
+      const depth = p.fracture * (isGlitch ? .46 : .35);
+      smooth(this.gate.gain, 1 - depth);
+      smooth(this.lfoDepth.gain, depth);
+      smooth(this.lfo.frequency, p.tempo / 60 * (isGlitch ? 4 : 2));
+      smooth(this.reverbLevel.gain, p.space * .80);
+      const mix = p.bypass ? 0 : p.mix;
+      smooth(this.dry.gain, 1 - mix);
+      smooth(this.wet.gain, mix * .8);
+      smooth(this.output.gain, Math.pow(10, p.gain / 20));
+    }
+
+    getAnalysis() {
+      let rms = 0, peak = 0, rmsL = 0, rmsR = 0, peakL = 0, peakR = 0;
+      if (this.analyser) {
+        this.analyser.getFloatTimeDomainData(this.wave);
+        this.analyser.getByteFrequencyData(this.freq);
+        this.analyserL.getFloatTimeDomainData(this.waveL);
+        this.analyserR.getFloatTimeDomainData(this.waveR);
+        for (let i = 0; i < this.wave.length; i++) {
+          rms += this.wave[i] * this.wave[i];
+          peak = Math.max(peak, Math.abs(this.wave[i]));
+          rmsL += this.waveL[i] * this.waveL[i];
+          rmsR += this.waveR[i] * this.waveR[i];
+          peakL = Math.max(peakL, Math.abs(this.waveL[i]));
+          peakR = Math.max(peakR, Math.abs(this.waveR[i]));
+        }
+        rms = Math.sqrt(rms / this.wave.length);
+        rmsL = Math.sqrt(rmsL / this.waveL.length);
+        rmsR = Math.sqrt(rmsR / this.waveR.length);
+      }
+      let progress = 0;
+      if (this.playing && this.buffer) {
+        const elapsed = Math.max(0, this.context.currentTime - this.startedAt);
+        progress = this.params.loop ? elapsed % this.buffer.duration / this.buffer.duration
+          : Math.min(1, elapsed / this.buffer.duration);
+      }
+      return { wave: this.wave, freq: this.freq, rms, peak, rmsL, rmsR, peakL, peakR,
+        progress, playing: this.playing };
+    }
+
+    getInfo() { return { ...this.info, peaks: this.info.peaks.slice() }; }
+  }
+
+  window.BotanicaAudio = BotanicaAudio;
+})();
+
+</script>
+  <script>
+(() => {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const engine = new window.BotanicaAudio();
+  const presets = [
+    { name: 'Glass Garden', profile: 'botanica', values: [.62, .28, .18, .68], mix: .75, description: 'Delicate chimes, softened by the morning.' },
+    { name: 'Silver Bloom', profile: 'metal', values: [.3, .78, .12, .51], mix: .82, description: 'A glint of metal. A trail of light.' },
+    { name: 'Moss Cloud', profile: 'botanica', values: [.91, .12, .06, .92], mix: .88, description: 'Warm, hazy, and beautifully unhurried.' },
+    { name: 'Porcelain Tide', profile: 'metal', values: [.46, .62, .23, .8], mix: .7, description: 'Fragile reflections in a wide open space.' },
+    { name: 'Fractured Dew', profile: 'glitch', values: [.39, .4, .86, .32], mix: .8, description: 'Small interruptions. Happy accidents.' },
+    { name: 'Night Herbarium', profile: 'botanica', values: [.8, .31, .3, .85], mix: .8, description: 'Collected echoes, after the sun goes down.' }
+  ];
+  const definitions = [
+    { id: 'organic', name: 'Organic', description: 'Soften & bloom', color: '#71936c', tint: '#83b57e' },
+    { id: 'metallic', name: 'Metallic', description: 'Resonate & shimmer', color: '#8196a2', tint: '#91b3ca' },
+    { id: 'fracture', name: 'Fracture', description: 'Scatter & interrupt', color: '#a79b70', tint: '#d5bf82' },
+    { id: 'space', name: 'Space', description: 'Expand & dissolve', color: '#9294ac', tint: '#b0a8cd' }
+  ];
+  const defaults = {organic:.62, metallic:.28, fracture:.18, space:.68, mix:.75};
+  let state = { ...defaults, gain:-6, bypass:false, loop:true, profile:'botanica', tempo:112,
+    motion:false, steps:[true,false,false,true,false,false,true,false,true,false,false,true,false,true,false,false], preset:0, modified:false };
+  let history = [], currentStep = -1, busy = false, lastPlaying = false, toastTimer;
+  let sample = engine.getInfo();
+  const knobElements = new Map();
+  const snapshot = () => JSON.stringify(state);
+  function remember(previous = snapshot()) {
+    if (history[history.length-1] !== previous) history.push(previous);
+    if (history.length > 40) history.shift();
+    $('undo').disabled = history.length === 0;
+  }
+  function toast(text) {
+    $('toast').textContent = text;
+    $('toast').classList.add('visible');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => $('toast').classList.remove('visible'), 3200);
+  }
+  function syncAudio() {
+    let fracture = state.fracture;
+    if (state.motion && engine.playing && currentStep >= 0) fracture = state.steps[currentStep] ? Math.max(.4, fracture) : 0;
+    engine.setParams({...state, fracture});
+  }
+  function setValue(key, value) {
+    state[key] = value; state.modified = true;
+    renderKnob(key); renderPresetName(); syncAudio(); drawBloom(0);
+  }
+  function createKnob(key, label, value, container) {
+    const knob = document.createElement('div');
+    knob.className = 'knob'; knob.tabIndex = 0; knob.dataset.param = key;
+    knob.setAttribute('role','slider'); knob.setAttribute('aria-label',label);
+    knob.setAttribute('aria-valuemin','0'); knob.setAttribute('aria-valuemax','100');
+    knob.innerHTML = '<svg viewBox="0 0 100 100" aria-hidden="true"><circle class="knob-track" cx="50" cy="50" r="45" stroke-dasharray="212.06 282.75"/><circle class="knob-arc" cx="50" cy="50" r="45"/></svg><div class="knob-face"><div class="knob-indicator"></div></div>';
+    container.append(knob); knobElements.set(key, {knob, value});
+    let drag = null;
+    knob.addEventListener('pointerdown', e => {
+      if (e.button !== 0) return;
+      e.preventDefault(); knob.focus(); knob.setPointerCapture(e.pointerId);
+      drag = { y:e.clientY, start:state[key], previous:snapshot(), fine:e.shiftKey };
+      knob.classList.add('dragging');
+    });
+    knob.addEventListener('pointermove', e => {
+      if (!drag) return;
+      setValue(key, Math.round(clamp(drag.start + (drag.y - e.clientY) / (drag.fine ? 1200 : 180)) * 100) / 100);
+    });
+    const end = () => {
+      if (drag && state[key] !== drag.start) remember(drag.previous);
+      drag = null; knob.classList.remove('dragging');
+    };
+    knob.addEventListener('pointerup', end); knob.addEventListener('lostpointercapture', end);
+    knob.addEventListener('dblclick', () => { if(state[key] !== defaults[key]) { remember(); setValue(key,defaults[key]); } });
+    knob.addEventListener('keydown', e => {
+      let next = state[key];
+      if (['ArrowUp','ArrowRight'].includes(e.key)) next += e.shiftKey ? .1 : .01;
+      else if (['ArrowDown','ArrowLeft'].includes(e.key)) next -= e.shiftKey ? .1 : .01;
+      else if (e.key === 'Home') next = 0;
+      else if (e.key === 'End') next = 1;
+      else return;
+      e.preventDefault(); next = Math.round(clamp(next)*100)/100;
+      if (next !== state[key]) { remember(); setValue(key,next); }
+    });
+  }
+  definitions.forEach((def,i) => {
+    const card = document.createElement('div'); card.className = 'macro-card';
+    card.style.setProperty('--knob-color',def.color); card.style.setProperty('--tint',def.tint);
+    const copy = document.createElement('div'); copy.className='knob-copy';
+    copy.innerHTML = `<span class="knob-index">MACRO 0${i+1}</span><div class="knob-name">${def.name}</div><div class="knob-description">${def.description}</div><div class="knob-value"></div>`;
+    createKnob(def.id,def.name,copy.querySelector('.knob-value'),card);
+    card.append(copy); $('macros').append(card);
+  });
+  const mixLabel = document.createElement('div'); mixLabel.className='knob-name'; mixLabel.textContent='Dry / Wet';
+  const mixValue = document.createElement('div'); mixValue.className='knob-value';
+  createKnob('mix','Dry / Wet',mixValue,$('mix-control')); $('mix-control').append(mixLabel,mixValue);
+  function renderKnob(key) {
+    const item = knobElements.get(key); if (!item) return;
+    const number = Math.round(state[key]*100);
+    item.knob.style.setProperty('--rotation',`${-135+state[key]*270}deg`);
+    item.knob.querySelector('.knob-arc').setAttribute('stroke-dasharray',`${state[key]*212.06} 282.75`);
+    item.knob.setAttribute('aria-valuenow',number); item.knob.setAttribute('aria-valuetext',`${number}%`);
+    item.value.innerHTML=`${number}<span>%</span>`;
+  }
+  function renderPresetName() {
+    $('preset-name').textContent = presets[state.preset].name + (state.modified ? ' ·' : '');
+    $('preset-count').textContent=`0${state.preset+1} / 06`;
+  }
+  function render() {
+    for (const key of knobElements.keys()) renderKnob(key);
+    renderPresetName();
+    document.querySelectorAll('[data-profile]').forEach(el => {
+      const selected=el.dataset.profile === state.profile;
+      el.classList.toggle('active',selected); el.setAttribute('aria-pressed',selected);
+    });
+    $('character-caption').textContent={botanica:'Soft edges. Infinite possibilities.',metal:'A little tension. A new resonance.',glitch:'Beautiful things fall out of rhythm.'}[state.profile];
+    $('profile-number').textContent={botanica:'B / 01',metal:'M / 02',glitch:'G / 03'}[state.profile];
+    $('gain').value=state.gain;
+    $('gain-value').innerHTML=`${state.gain.toFixed(1).replace('-','−')} <span>dB</span>`;
+    $('gain').style.background=`linear-gradient(90deg,#849c6d ${(state.gain+24)/30*100}%,#5e7f411a ${(state.gain+24)/30*100}%)`;
+    $('bypass').setAttribute('aria-pressed',state.bypass);
+    document.querySelector('.plugin').classList.toggle('bypassed',state.bypass);
+    $('loop').setAttribute('aria-pressed',state.loop); $('loop').classList.toggle('selected',state.loop);
+    $('motion-toggle').setAttribute('aria-checked',state.motion);
+    $('tempo').value=state.tempo;
+    renderSteps(); renderTransport(); drawBloom(0); syncAudio();
+  }
+  $('steps').innerHTML=state.steps.map((on,i) => `<button class="step" data-step="${i}" aria-label="ステップ ${i+1}" aria-pressed="${on}"></button>`).join('');
+  function renderSteps() {
+    document.querySelectorAll('.step').forEach((el,i) => { el.classList.toggle('on',state.steps[i]); if(!state.motion) el.classList.remove('current'); el.setAttribute('aria-pressed',state.steps[i]); });
+    $('sequence-state').textContent=state.motion ? 'Synced to internal tempo' : 'Enable motion to animate';
+  }
+  $('steps').addEventListener('click',e => {
+    const button=e.target.closest('[data-step]'); if(!button) return;
+    remember(); const i=+button.dataset.step; state.steps[i]=!state.steps[i]; renderSteps(); syncAudio();
+  });
+  $('motion-toggle').onclick=() => {remember(); state.motion=!state.motion; currentStep=-1; render();};
+  $('shuffle').onclick=() => {
+    remember();
+    for(let i=15;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [state.steps[i],state.steps[j]]=[state.steps[j],state.steps[i]];}
+    renderSteps(); syncAudio(); toast('ステップ数を保ったまま並べ替えました');
+  };
+  $('tempo').addEventListener('change',() => {remember(); const value=Number($('tempo').value); state.tempo=clamp(Number.isFinite(value)?value:112,40,200); render();});
+  document.querySelectorAll('[data-profile]').forEach(el => el.onclick=() => {
+    if(state.profile===el.dataset.profile) return;
+    remember(); state.profile=el.dataset.profile; state.modified=true; render();
+  });
+  let gainSnapshot;
+  $('gain').addEventListener('pointerdown',() => gainSnapshot=snapshot());
+  $('gain').addEventListener('keydown',() => { if(!gainSnapshot) gainSnapshot=snapshot(); });
+  $('gain').addEventListener('input',() => {state.gain=+$('gain').value; render();});
+  $('gain').addEventListener('change',() => {if(gainSnapshot) remember(gainSnapshot); gainSnapshot=null;});
+  $('loop').onclick=() => {remember(); state.loop=!state.loop; render();};
+  $('bypass').onclick=() => {remember(); state.bypass=!state.bypass; render(); toast(state.bypass?'Bypass：元のサンプル音を再生します':'エフェクトを有効にしました');};
+  $('undo').onclick=() => { if(!history.length) return; state=JSON.parse(history.pop()); $('undo').disabled=!history.length; render(); toast('ひとつ前の設定に戻しました'); };
+  $('randomize').onclick=() => {
+    remember(); definitions.forEach(def => state[def.id]=Math.round((.1+Math.random()*.8)*100)/100);
+    state.modified=true; render(); toast('新しいテクスチャを見つけました');
+  };
+  function loadPreset(index) {
+    remember(); state.preset=(index+presets.length)%presets.length;
+    const preset=presets[state.preset]; definitions.forEach((def,i) => state[def.id]=preset.values[i]);
+    state.mix=preset.mix; state.profile=preset.profile; state.modified=false; render();
+  }
+  $('preset-prev').onclick=() => loadPreset(state.preset-1);
+  $('preset-next').onclick=() => loadPreset(state.preset+1);
+  $('preset-open').onclick=() => {
+    $('preset-list').innerHTML=presets.map((p,i)=>`<button class="preset-item ${state.preset===i?'chosen':''}" data-preset="${i}"><span class="preset-num">0${i+1}</span><span><strong>${p.name}</strong><small>${p.description}</small></span><span class="preset-profile">${p.profile}</span></button>`).join('');
+    $('preset-dialog').showModal();
+  };
+  $('preset-list').onclick=e=>{const item=e.target.closest('[data-preset]');if(item){loadPreset(+item.dataset.preset);$('preset-dialog').close();}};
+  document.querySelectorAll('.close-modal').forEach(el=>el.onclick=()=>el.closest('dialog').close());
+  document.querySelectorAll('dialog').forEach(dialog=>dialog.addEventListener('click',e=>{
+    if(e.target!==dialog) return; const r=dialog.getBoundingClientRect();
+    if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom) dialog.close();
+  }));
+  $('info').onclick=()=>$('info-dialog').showModal();
+  $('theme').onclick=()=>{
+    const dusk=document.body.dataset.theme!=='dusk'; document.body.dataset.theme=dusk?'dusk':'garden';
+    $('theme').setAttribute('aria-label',dusk?'Gardenの背景に切り替え':'Duskの背景に切り替え');
+    toast(dusk?'Dusk — a cooler reflection':'Garden — back to nature');
+  };
+  function renderTransport() {
+    const playing=engine.playing;
+    $('play').querySelector('svg').innerHTML=playing?'<path d="M7 6h10v12H7Z" fill="currentColor" stroke="none"/>':'<path d="m9 5 11 7-11 7Z" fill="currentColor" stroke="none"/>';
+    $('play').querySelector('span').textContent=playing?'Stop sample':'Play sample';
+    $('play').setAttribute('aria-label',playing?'試聴を停止':'試聴を再生');
+    $('engine-status').textContent=state.bypass?'Bypassed · dry signal':playing?'A garden in motion':'Ready to bloom';
+  }
+  async function togglePlay() {
+    if(busy) return; busy=true;
+    try {
+      if(engine.playing) engine.stop(); else {syncAudio();await engine.play();}
+      updateAudioInfo(); renderTransport();
+    } catch(error){toast(error.message);} finally {busy=false;}
+  }
+  $('play').onclick=togglePlay;
+  document.addEventListener('keydown',e=>{
+    if(e.code==='Space'&&!e.repeat&&!['INPUT','BUTTON','TEXTAREA','SELECT'].includes(e.target.tagName)&&!document.querySelector('dialog[open]')){e.preventDefault();togglePlay();}
+    if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='z'&&!['INPUT','TEXTAREA'].includes(e.target.tagName)){e.preventDefault();$('undo').click();}
+  });
+  function updateAudioInfo() {
+    if(engine.context) $('audio-status').textContent=`${(engine.context.sampleRate/1000).toFixed(1)} kHz · WEB AUDIO`;
+  }
+  async function importFile(file) {
+    if(!file) return;
+    $('engine-status').textContent='Loading sample…';
+    try {
+      sample=await engine.loadFile(file);
+      $('sample-name').textContent=sample.name;
+      $('sample-info').textContent=`${sample.channels===1?'MONO':'STEREO'} · ${(sample.sampleRate/1000).toFixed(1)} kHz · ${sample.duration.toFixed(1)} s`;
+      $('source-tag').textContent='FILE'; $('duration').textContent=formatTime(sample.duration);
+      updateAudioInfo(); drawWave(0); toast('サンプルを読み込みました。Playで試聴できます。');
+    } catch(error) {toast(error.message);} finally {renderTransport();$('file-input').value='';}
+  }
+  $('upload').onclick=()=>$('file-input').click();
+  $('file-input').onchange=e=>importFile(e.target.files[0]);
+  let dragDepth=0;
+  $('drop-zone').addEventListener('dragenter',e=>{e.preventDefault();dragDepth++;$('drop-zone').classList.add('dragover');});
+  $('drop-zone').addEventListener('dragover',e=>{e.preventDefault();e.dataTransfer.dropEffect='copy';});
+  $('drop-zone').addEventListener('dragleave',()=>{if(--dragDepth<=0){dragDepth=0;$('drop-zone').classList.remove('dragover');}});
+  $('drop-zone').addEventListener('drop',e=>{e.preventDefault();dragDepth=0;$('drop-zone').classList.remove('dragover');importFile(e.dataTransfer.files[0]);});
+  window.addEventListener('dragover',e=>e.preventDefault()); window.addEventListener('drop',e=>e.preventDefault());
+  function formatTime(seconds){return `${Math.floor(seconds/60)}:${String(Math.floor(seconds%60)).padStart(2,'0')}`;}
+  const canvas=$('waveform'), ctx=canvas.getContext('2d');
+  let cw=0,ch=0;
+  function drawWave(progress) {
+    const rect=canvas.getBoundingClientRect(), dpr=window.devicePixelRatio||1;
+    if(!rect.width) return;
+    if(cw!==rect.width||ch!==rect.height){cw=rect.width;ch=rect.height;canvas.width=Math.round(cw*dpr);canvas.height=Math.round(ch*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);}
+    ctx.clearRect(0,0,cw,ch);
+    ctx.beginPath();ctx.moveTo(0,ch*.45);ctx.lineTo(cw,ch*.45);ctx.strokeStyle='#73906826';ctx.lineWidth=.5;ctx.stroke();
+    const count=Math.floor(cw/3),max=Math.max(.001,...sample.peaks);
+    for(let i=0;i<count;i++){
+      const amplitude=sample.peaks[Math.floor(i/count*sample.peaks.length)]/max;
+      const h=Math.max(1.5,amplitude*(ch-22)*.83),x=i*3+1;
+      ctx.fillStyle=i/count<progress?'#3a785b':'#829d7180';ctx.fillRect(x,(ch*.9-h)/2,1.4,h);
+    }
+    if(engine.playing){ctx.fillStyle='#4d835f';ctx.fillRect(progress*cw,7,1,ch-21);}
+    $('play-time').textContent=formatTime(progress*sample.duration);
+  }
+  const svgNS='http://www.w3.org/2000/svg';
+  const bloomPaths=Array.from({length:32},()=>{const path=document.createElementNS(svgNS,'path');path.setAttribute('stroke','url(#bloom-gradient)');$('bloom-lines').append(path);return path;});
+  function drawBloom(time) {
+    const o=state.organic,m=state.metallic,f=state.fracture,s=state.space;
+    bloomPaths.forEach((path,i)=>{
+      const layer=i/31,phase=layer*Math.PI*2,timeShift=time*.18;
+      let d='';
+      for(let j=0;j<=160;j++){
+        const a=j/160*Math.PI*2;
+        const petal=Math.sin(a*3+phase+timeShift)*(9+o*14);
+        const x=240+Math.cos(a)*(133+s*23+petal)+Math.sin(phase)*16*Math.sin(a);
+        const y=85+Math.sin(a)*(28+layer*21)+Math.sin(a*(state.profile==='metal'?6:3)+phase+timeShift)*(10+o*10)+Math.cos(a*2+phase)*m*10+(state.profile==='glitch'?Math.sin(a*16+phase)*f*4:0);
+        d+=(j?'L':'M')+x.toFixed(2)+','+y.toFixed(2);
+      }
+      path.setAttribute('d',d+'Z');path.setAttribute('opacity',.22+Math.sin(layer*Math.PI)*.42);
+    });
+  }
+  const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
+  let lastFrame=0,lastBloom=0;
+  function frame(now) {
+    requestAnimationFrame(frame);
+    if(document.hidden||now-lastFrame<40) return;lastFrame=now;
+    const a=engine.getAnalysis();
+    if(a.playing!==lastPlaying){lastPlaying=a.playing;renderTransport();}
+    const db=v=>v>0.00003?20*Math.log10(v):-90;
+    $('meter-l').style.height=`${clamp((db(a.rmsL??a.rms)+48)/48)*100}%`;
+    $('meter-r').style.height=`${clamp((db(a.rmsR??a.rms)+48)/48)*100}%`;
+    $('level-value').textContent=a.peak>.00003?`${db(a.peak).toFixed(1).replace('-','−')} dBFS`:'−∞ dBFS';
+    drawWave(a.progress);
+    const step=state.motion&&a.playing?Math.floor((engine.context.currentTime-engine.startedAt)*state.tempo/60*4)%16:-1;
+    if(step!==currentStep){currentStep=step;document.querySelectorAll('.step').forEach((el,i)=>el.classList.toggle('current',i===step));syncAudio();}
+    if(a.playing&&!reducedMotion.matches&&now-lastBloom>66){drawBloom(now/1000);lastBloom=now;}
+  }
+  new ResizeObserver(()=>drawWave(engine.getAnalysis().progress)).observe(canvas);
+  render(); drawWave(0); requestAnimationFrame(frame);
+})();
+
+</script>
+</body>
+</html>
